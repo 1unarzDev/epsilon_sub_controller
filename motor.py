@@ -1,12 +1,15 @@
-from gpiozero import Motor
-from gpiozero.pins.pigpio import PiGPIOFactory
+from gpiozero import Motor, Device
+from gpiozero.pins.lgpio import LGPIOFactory
+from time import sleep
 
-factory = PiGPIOFactory()
+Device.pin_factory = LGPIOFactory()
 
 leftMotor = Motor(19, 20, pwm=True)
 rightMotor = Motor(11, 12, pwm=True)
 
 if __name__ == '__main__':
-    leftMotor.value(1)
+    leftMotor.forward()
+    rightMotor.forward()
     sleep(2)
-    leftMotor.value(0)
+    leftMotor.stop()
+    rightMotor.stop()
